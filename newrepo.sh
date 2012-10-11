@@ -11,16 +11,18 @@ if [ $# != 3 ]; then
 	exit 0;
 fi
 
+USER=$1
+NAME=$2
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 mkdir -p $3
-cd $3
+pushd $3
 
-echo "GitHub password for $1:"
+echo "GitHub password for ${USER}:"
 read -s PASS
-curl -u "$1:$PASS" https://api.github.com/user/repos -d "{\"name\":\"$2\"}"
+curl -u "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}"
 
 git init
-git remote add origin git@github.com:$1/$2.git
+git remote add origin git@github.com:${USER}/${NAME}.git
 
 touch README
 touch LICENSE
@@ -30,4 +32,4 @@ git add *
 git commit -m "Initial commit"
 git push origin master
 
-cd $DIR
+popd
