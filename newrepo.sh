@@ -22,11 +22,7 @@ pushd "$DIR"
 echo "GitHub password for ${USER}:"
 read -s PASS
 
-FAIL=(curl -u "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}" | grep -c "\"Bad credentials\"")
-
-if [ FAIL -gt "0" ]; then
-	exit 1;
-fi
+RETURN=curl -vu "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}"
 
 git init
 git remote add origin git@github.com:"${USER}"/"${NAME}".git
