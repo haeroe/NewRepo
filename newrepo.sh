@@ -22,7 +22,7 @@ pushd "$DIR"
 echo "GitHub password for ${USER}:"
 read -s PASS
 
-RETURN=curl -u "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}"
+curl -vu "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}"
 
 git init
 git remote add origin git@github.com:"${USER}"/"${NAME}".git
