@@ -32,7 +32,7 @@ read -s PASS
 curl -fsu "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}" || exit 1
 
 if [ $# -eq 2 ]; then
-	exit 1;
+	exit 0;
 fi
 
 git init
