@@ -22,7 +22,7 @@ pushd "$DIR"
 echo "GitHub password for ${USER}:"
 read -s PASS
 
-FAIL=curl -u "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}" | grep -c "\"Bad credentials\""
+FAIL=(curl -u "${USER}:${PASS}" https://api.github.com/user/repos -d "{\"name\":\"${NAME}\"}" | grep -c "\"Bad credentials\"")
 
 if [ FAIL -gt 0 ]; then
 	exit 1;
